@@ -1,0 +1,22 @@
+name: benchmarks
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+
+jobs:
+  benchmarks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v3
+        with:
+          python-version: '3.10'
+      - run: pip install -r requirements.txt
+
+      - name: Run the latest action
+        uses: CodSpeedHQ/action@v1
+        with:
+          run: pytest tests/ --codspeed
